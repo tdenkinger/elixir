@@ -5,11 +5,6 @@ defmodule MyList do
   def map(list, func),           do: _map(list, func)
   def mapsum(list, func),        do: map(list, func) |> sum
 
-  def caesar([], _),         do: []
-  def caesar(list, rot) do
-
-  end
-
   defp _map([], _func),           do: []
   defp _map([head | tail], func), do: [ func.(head) | _map(tail, func) ]
 
