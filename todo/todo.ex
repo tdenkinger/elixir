@@ -1,23 +1,17 @@
-defmodule MultiDict do
-  def new, do: HashDict.new
-
-  def add(dict, key, value) do
-    HashDict.update(dict, key, [value], &[value | &1])
-  end
-
-  def get(dict, key) do
-    HashDict.get(dict, key, [])
-  end
-end
-
 defmodule TodoList do
-  def new, do: MultiDict.new
+  defstruct auto_id: 1, entries: HashDict.new
 
-  def add_entry(todo_list, entry) do
-    MultiDict.add(todo_list, entry.date, entry)
-  end
+  def new, do: %TodoList{}
 
-  def entries(todo_list, date) do
-    MultiDict.get(todo_list, date)
+  def add_entry(
+    %TodoList{entries: entries, auto_id: auto_id} = todo_list,
+    entry ) do
+
+    entry = Map.put(entry, :id, auto_id)
+    new_entries = HashDict.put(entries, auto_id, entry)
+
+    %TodoList{ todo_list |
+      entries: new_entries, auto_id: auto_id + 1
+    }
   end
 end
