@@ -1,2 +1,3 @@
 *.beam
 *.PDF
+/elixir-in-action
