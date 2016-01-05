@@ -84,3 +84,9 @@ defmodule TodoList.CsvImporter do
     |> Stream.map(&String.replace(&1, "\n", ""))
   end
 end
+
+defimpl String.Chars, for: TodoList do
+  def to_string(_) do
+    "#TodoList"
+  end
+end
