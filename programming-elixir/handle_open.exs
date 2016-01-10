@@ -3,5 +3,6 @@ handle_open = fn
   {_,   error} -> "Error: #{:file.format_error(error)}"
 end
 
-IO.puts handle_open.(File.open("/home/troy/dotfiles/setup.sh"))
-IO.puts handle_open.(File.open("Blurgh"))
+IO.puts handle_open.(File.open("/etc/passwd"))
+IO.puts handle_open.(File.open("/etc/xpasswd"))
+

@@ -85,8 +85,17 @@ defmodule TodoList.CsvImporter do
   end
 end
 
-defimpl String.Chars, for: TodoList do
-  def to_string(_) do
-    "#TodoList"
+defimpl Collectable, for: TodoList do
+  def into(original) do
+    {original, &into_callback/2}
   end
+
+  defp into_callback(todo_list, {:cont, entry}) do
+    TodoList.add_entry(todo_list, entry)
+  end
+
+  defp into_callback(todo_list, :done), do: todo_list
+  defp into_callback(todo_list, :halt), do: :ok
 end
+
+
